@@ -235,10 +235,10 @@ void Output::DrawCond(Point Left, int width, int height, string Text, bool Selec
 		pWind->SetPen(UI.DrawColor, 3);	//use normal color
 
 	//Draw the statement block rectangle
-	pWind->DrawQuad(Left.x, Left.y, Left.x + width / 2, Left.y + height / 2, Left.x, Left.y + height, Left.x - width / 2, Left.y + height / 2);
+	pWind->DrawQuad(Left.x, Left.y, Left.x + width, Left.y + height, Left.x, Left.y + 2*height, Left.x - width, Left.y + height );
 	//Write statement text
 	pWind->SetPen(BLACK, 2);
-	pWind->DrawString(Left.x-width/4, Left.y + height / 2, Text);
+	pWind->DrawString(Left.x-width/2, Left.y + height, Text);
 }
 
 void Output::DrawStart(Point Left, int width, int height,string Text, bool Selected)

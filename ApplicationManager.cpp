@@ -2,6 +2,9 @@
 #include "Actions\AddValueAssign.h"
 #include "GUI\Input.h"
 #include "GUI\Output.h"
+#include "Actions\AddCond.h"
+#include "Actions/AddStart.h"
+#include"Actions/AddEnd.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -49,8 +52,20 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		case ADD_CONDITION:
 			///create AddCondition Action here
-
+			pAct = new AddCond(this);
 			break;
+		case ADD_START:
+			pAct = new AddStart(this);
+			break;
+		case ADD_END:
+			pAct = new AddEnd(this);
+			break;
+		case ADD_READ:
+			//pAct = new Read(this);
+			//break;
+		case ADD_WRITE:
+			//pAct = new Write(this);
+			//break;
 
 		case SELECT:
 			///create Select Action here

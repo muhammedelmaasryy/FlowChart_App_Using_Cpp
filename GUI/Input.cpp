@@ -38,7 +38,7 @@ string Input::GetString(Output *pO) const
 double Input::GetValue(Output* pO) const	// Reads a double value from the user 
 {
 	///TODO: add code to read a double value from the user and assign it to D
-	pO->PrintMessage("Please enter a value");
+	pO->PrintMessage("Enter a value 'RHS':");
 	string x = GetString(pO);
 	
 	bool z = IsValue(x);
@@ -50,7 +50,7 @@ double Input::GetValue(Output* pO) const	// Reads a double value from the user
 		z = IsValue(x);
 		break;
 	}
-	D = stod(x);
+        D = stod(x);
 		
 	//This function should make any needed validations on the entered text 
 	// to make sure it is a double value (e.g. 12.5, -12.5, -23, -23., -23.0 …etc.).
@@ -62,7 +62,7 @@ double Input::GetValue(Output* pO) const	// Reads a double value from the user
 }
 string Input::GetVariable(Output *pO)const
 {
-	pO->PrintMessage("Please enter a variable");
+	pO->PrintMessage("Enter variable 'LHS':");
 	string variable = GetString(pO);
 
 

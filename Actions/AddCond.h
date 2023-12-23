@@ -1,5 +1,5 @@
-#ifndef ADD_VALUE_ASSIGN_H
-#define ADD_VALUE_ASSIGN_H
+#ifndef ADD_COND_H
+#define ADD_COND_H
 
 #include "Action.h"
 #include "..\Statements\ValueAssign.h"
@@ -10,7 +10,7 @@
 // 2 - Getting the LHS and RHS of the statement from the user (some of the parameters of this action)
 // 3 - Creating an object of Assignment class and passing it parameters
 // 4 - Adding the created object to the list of statements of the application manager
-class AddValueAssign : public Action
+class AddCond : public Action
 {
 private:
 	// in the data members of the actions
@@ -19,11 +19,12 @@ private:
 
 	Point Position;	//Position where the user clicks to add the stat.
 	string LHS;
+	string CompOp; 
 	double RHS;
-	//TODO: you should add LHS and RHS of the assignment statement as parameters
+	
 
 public:
-	AddValueAssign(ApplicationManager *pAppManager);
+	AddCond(ApplicationManager *pAppManager);
 
 	//Read Assignemt statements position
 	virtual void ReadActionParameters();
