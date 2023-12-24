@@ -37,5 +37,6 @@ Point Connector::getEndPoint()
 void Connector::Draw(Output* pOut) const
 {
 	///TODO: Call Output to draw a connector from SrcStat to DstStat on the output window
+	pOut->DrawConnector1(Start,UI.ASSGN_WDTH,UI.ASSGN_HI,true);
 }
 

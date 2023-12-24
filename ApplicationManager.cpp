@@ -5,6 +5,7 @@
 #include "Actions\AddCond.h"
 #include "Actions/AddStart.h"
 #include"Actions/AddEnd.h"
+#include"Actions\AddConnector.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -66,7 +67,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_WRITE:
 			//pAct = new Write(this);
 			//break;
-
+		case ADD_CONNECTOR:
+			//pAct = new AddConnector(this);
+			break;
 		case SELECT:
 			///create Select Action here
 
@@ -115,6 +118,15 @@ Statement *ApplicationManager::GetStatement(Point P) const
 	///WITHOUT breaking class responsibilities
 
 	return NULL;
+}
+void ApplicationManager::AddConnector(Connector* pConn)
+{
+	if (ConnCount < MaxCount)
+		ConnList[StatCount++] = pConn;
+}
+Connector* ApplicationManager::GetConnector(Point P) const
+{
+	return nullptr;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Returns the selected statement
