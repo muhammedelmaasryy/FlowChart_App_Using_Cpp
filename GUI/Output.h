@@ -42,7 +42,9 @@ public:
 	void DrawEnd(Point Left, int width, int height,string Text ,bool Selected);
 	void DrawConnector(Point Left, int width, int height,string Text, bool Selected);
 
-	void DrawConnector1(Point Left, int width, int height, bool Selected);
+	void DrawConnector1(Point Start, Point End, bool Selected);
+
+	//void DrawConnector1(Point Left, int width, int height, bool Selected);
 
 	void DrawConnector2(Point Left, int width, int height, string Text, bool Selected);
 

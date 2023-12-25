@@ -43,6 +43,22 @@ void ValueAssign::Draw(Output* pOut) const
 	
 }
 
+Point ValueAssign::GetStart()
+{
+	return Outlet;
+}
+
+Point ValueAssign::GetEnd()
+{
+	return Inlet;
+}
+
+bool ValueAssign::IsPointOnMe(Point p)
+{
+	return (p.x >= LeftCorner.x && p.x <= (LeftCorner.x + UI.ASSGN_WDTH))
+		&& (p.y >= LeftCorner.y && p.y <= (LeftCorner.y+UI.ASSGN_HI));
+}
+
 
 //This function should be called when LHS or RHS changes
 void ValueAssign::UpdateStatementText()
@@ -50,5 +66,5 @@ void ValueAssign::UpdateStatementText()
 	//Build the statement text: Left handside then equals then right handside
 	ostringstream T;
 	T<<LHS<<" = "<<RHS;	
-	Text = T.str();	 
+	Text = T.str();
 }

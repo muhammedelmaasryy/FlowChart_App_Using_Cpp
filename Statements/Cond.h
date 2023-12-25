@@ -31,7 +31,7 @@ private:
 	virtual void UpdateStatementText();
 	
 public:
-	Cond(Point Lcorner, string LeftHS="",string Cop="==", double RightHS = 0);
+	Cond(Point Lcorner, string LeftHS="",string Cop="", double RightHS = 0);
 	
 	void setLHS(const string &L);
 	void setCompOp(string Cop);

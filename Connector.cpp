@@ -1,10 +1,10 @@
 #include "Connector.h"
 
-Connector::Connector(Statement* Src, Statement* Dst)	
+Connector::Connector(Statement* Src, Statement* Dst,Point Start,Point End):Start(Start),End(End)
 //When a connector is created, it must have a source statement and a destination statement
 //There are NO FREE connectors in the flowchart
 {
-	
+	this->Select = false;
 	SrcStat = Src;
 	DstStat = Dst;
 }
@@ -37,6 +37,6 @@ Point Connector::getEndPoint()
 void Connector::Draw(Output* pOut) const
 {
 	///TODO: Call Output to draw a connector from SrcStat to DstStat on the output window
-	pOut->DrawConnector1(Start,UI.ASSGN_WDTH,UI.ASSGN_HI,true);
+	pOut->DrawConnector1(Start,End,Select);
 }
 

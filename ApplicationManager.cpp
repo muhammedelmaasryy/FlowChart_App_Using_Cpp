@@ -43,6 +43,9 @@ ActionType ApplicationManager::GetUserAction() const
 void ApplicationManager::ExecuteAction(ActionType ActType) 
 {
 	Action* pAct = NULL;
+	Connector* Connect = NULL;
+	Statement* Src = NULL;
+	Statement* Dst = NULL;
 	
 	//According to ActioType, create the corresponding action object
 	switch (ActType)
@@ -68,7 +71,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			//pAct = new Write(this);
 			//break;
 		case ADD_CONNECTOR:
-			//pAct = new AddConnector(this);
+			pAct = new AddConn(this);
 			break;
 		case SELECT:
 			///create Select Action here
@@ -110,9 +113,9 @@ void ApplicationManager::AddStatement(Statement *pStat)
 ////////////////////////////////////////////////////////////////////////////////////
 Statement *ApplicationManager::GetStatement(Point P) const
 {
-	//If this point P(x,y) belongs to a statement return a pointer to it.
-	//otherwise, return NULL
-
+	for (int i = 0; i < StatCount; i++)
+		if (StatList[i]->IsPointOnMe(P))
+			return StatList[i];
 
 	///Add your code here to search for a statement given a point P(x,y)	
 	///WITHOUT breaking class responsibilities
@@ -122,7 +125,7 @@ Statement *ApplicationManager::GetStatement(Point P) const
 void ApplicationManager::AddConnector(Connector* pConn)
 {
 	if (ConnCount < MaxCount)
-		ConnList[StatCount++] = pConn;
+		ConnList[ConnCount++] = pConn;
 }
 Connector* ApplicationManager::GetConnector(Point P) const
 {

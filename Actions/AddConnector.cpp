@@ -11,18 +11,31 @@
 using namespace std;
 
 //constructor: set the ApplicationManager pointer inside this action
-AddConnector::AddConnector(ApplicationManager *pAppManager):Action(pAppManager)
+AddConn::AddConn(ApplicationManager *pAppManager):Action(pAppManager)
 {}
 
-void AddConnector::ReadActionParameters()
+void AddConn::ReadActionParameters()
 {
 	Input *pIn = pManager->GetInput();
 	Output *pOut = pManager->GetOutput();
-	
 	//Read the (Position) parameter
-	pOut->PrintMessage("Start Statement: Click to draw statement");
+	pOut->PrintMessage("Start Statement: Click Start statement");
+	pIn->GetPointClicked(P1);
+	Statement* Src = pManager->GetStatement(P1);
+	while (!Src) {
+		pOut->PrintMessage("Erorr!! Click on valid Start statement");
+		pIn->GetPointClicked(P1);
+		Src = pManager->GetStatement(P1);
+	}
+	pOut->PrintMessage("Start Statement: Click End statement");
+	pIn->GetPointClicked(P2);
+	Statement* Dst = pManager->GetStatement(P2);
+	while (!Dst) {
+		pOut->PrintMessage("Erorr!! Click on valid End statement");
+		pIn->GetPointClicked(P2);
+		Src = pManager->GetStatement(P2);
+	}
 
-	pIn->GetPointClicked(Position);
 	pOut->ClearStatusBar();		
 
 	//TODO: Ask the user in the status bar to enter the RHS and set the data member
@@ -31,20 +44,22 @@ void AddConnector::ReadActionParameters()
 	//      Call the appropriate functions for this.
 }
 
-void AddConnector::Execute()
+void AddConn::Execute()
 {
 	ReadActionParameters();
-		
-	
+	Statement* Src = pManager->GetStatement(P1);
+	Statement* Dst = pManager->GetStatement(P2);
+	Point Start = Src->GetStart();
+	Point End = Dst->GetEnd();
+
 	//Calculating left corner of assignement statement block
 	//Point Corner;
 	//Corner.x = Position.x - UI.ASSGN_WDTH/2;
 	//Corner.y = Position.y ;
-	Statement* Src;
-	Statement* Dst;
+	
 
 	
-	Connector *pAssign = new Connector(Src,Dst);
+	Connector *pAssign = new Connector(Src,Dst,Start,End);
 	//TODO: should set the LHS and RHS of pAssign statement
 	//      with the data members set and validated before in ReadActionParameters()
 

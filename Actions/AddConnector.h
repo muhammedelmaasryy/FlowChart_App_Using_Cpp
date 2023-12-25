@@ -12,18 +12,19 @@
 // 2 - Getting the LHS and RHS of the statement from the user (some of the parameters of this action)
 // 3 - Creating an object of Assignment class and passing it parameters
 // 4 - Adding the created object to the list of statements of the application manager
-class AddConnector : public Action
+class AddConn : public Action
 {
 private:
 	// in the data members of the actions
 	// we put the paramaters of the action
 	// to be set in ReadActionParameters() then used in Execute()
 
-	Point Position;	//Position where the user clicks to add the stat.
+	Point P1;	//Position where the user clicks to add the stat.
+	Point P2;	//Position where the user clicks to add the stat.
 	//TODO: you should add LHS and RHS of the assignment statement as parameters
 
 public:
-	AddConnector(ApplicationManager *pAppManager);
+	AddConn(ApplicationManager *pAppManager);
 
 	//Read Assignemt statements position
 	virtual void ReadActionParameters();

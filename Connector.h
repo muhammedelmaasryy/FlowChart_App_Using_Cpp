@@ -11,9 +11,10 @@ private:
 	Statement *SrcStat;	//The source statement of the connector
 	Statement *DstStat;	//The destination statement of the connector
 	Point Start;	//Start point of the connector
-	Point End;		//End point of the connector
+	Point End;	
+	bool Select;	//End point of the connector
 public:
-	Connector(Statement* Src, Statement* Dst);
+	Connector(Statement* Src, Statement* Dst,Point Start,Point End);
 
 	void		setSrcStat(Statement *Src);
 	Statement*	getSrcStat();	

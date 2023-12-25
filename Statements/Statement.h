@@ -25,8 +25,10 @@ public:
 	bool IsSelected() const;
 
 	virtual void Draw(Output* pOut) const  = 0 ;	//Draw the statement
+	virtual  Point GetStart()=0;
+	virtual  Point GetEnd()=0;
 	
-	
+	virtual bool IsPointOnMe(Point p) = 0;
 
 	///TODO:The following functions should be supported by the Statement class
 	///		It should then be overridden by each derived Statement
