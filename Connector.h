@@ -27,6 +27,8 @@ public:
 	void setEndPoint(Point P);
 	Point getEndPoint();
 
+	bool IsPointOnMe(Point p);
+
 	void Draw(Output* pOut) const;
 	
 

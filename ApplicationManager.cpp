@@ -129,7 +129,12 @@ void ApplicationManager::AddConnector(Connector* pConn)
 }
 Connector* ApplicationManager::GetConnector(Point P) const
 {
-	return nullptr;
+
+	for (int i = 0; i < ConnCount; i++)
+		if (ConnList[i]->IsPointOnMe(P))
+			return ConnList[i];
+	
+	return NULL;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Returns the selected statement

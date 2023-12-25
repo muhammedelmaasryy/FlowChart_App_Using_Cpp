@@ -293,15 +293,35 @@ void Output::DrawConnector(Point Left, int width, int height,string Text, bool S
 	pWind->SetPen(BLACK, 2);
 	pWind->DrawString(Left.x - width / 3, Left.y + height / 3, Text);
 }
-void Output::DrawConnector1(Point Start, Point End,bool Selected)
+void Output::DrawLine(Point Left, int width, int height,bool Selected)
 {
 	if (Selected)	//if stat is selected, it should be highlighted
-		pWind->SetPen(UI.HighlightColor, 1);	//use highlighting color
+		pWind->SetPen(UI.HighlightColor, 2);	//use highlighting color
 	else
-		pWind->SetPen(UI.DrawColor, 1);	//use normal color
+		pWind->SetPen(UI.DrawColor, 2);	//use normal color
 
 	//Draw the connector line
-	pWind->DrawLine(Start.x, Start.y, End.x, End.y);
+	pWind->DrawLine(Left.x, Left.y,Left.x+width,Left.y+height);
+}
+void Output::DrawLine1(int iX1,int iY1, int iX2, int iY2, bool Selected)
+{
+	if (Selected)	//if stat is selected, it should be highlighted
+		pWind->SetPen(UI.HighlightColor, 2);	//use highlighting color
+	else
+		pWind->SetPen(UI.DrawColor, 2);	//use normal color
+
+	//Draw the connector line
+	pWind->DrawLine(iX1, iY1, iX2, iY2);
+}
+void Output::DrawConnector1(int iX1, int iY1, int iX2, int iY2, bool Selected)
+{
+	if (Selected)	//if stat is selected, it should be highlighted
+		pWind->SetPen(UI.HighlightColor, 2);	//use highlighting color
+	else
+		pWind->SetPen(UI.DrawColor, 2);	//use normal color
+
+	//Draw the connector line
+	pWind->DrawLine(iX1, iY1,iX2, iY2);
 
 
 
@@ -311,14 +331,14 @@ void Output::DrawConnector1(Point Start, Point End,bool Selected)
 		pWind->SetPen(UI.DrawColor, 3);	//use normal color
 
 	//Draw the statement block rectangle
-	pWind->DrawTriangle(End.x, End.y, End.x +6, End.y-8, End.x -6,End.y -8);
+	pWind->DrawTriangle(iX2, iY2, iX2 +6, iY2-8, iX2 -6,iY2 -8);
 }
 void Output::DrawConnector2(Point Left, int width, int height, string Text, bool Selected)
 {
 	if (Selected)	//if stat is selected, it should be highlighted
-		pWind->SetPen(UI.HighlightColor, 3);	//use highlighting color
+		pWind->SetPen(UI.HighlightColor, 2);	//use highlighting color
 	else
-		pWind->SetPen(UI.DrawColor, 3);	//use normal color
+		pWind->SetPen(UI.DrawColor, 2);	//use normal color
 
 	//Draw the connector line
 	pWind->DrawLine(Left.x, Left.y, Left.x - width, Left.y);
@@ -334,7 +354,7 @@ void Output::DrawConnector2(Point Left, int width, int height, string Text, bool
 		pWind->SetPen(UI.DrawColor, 3);	//use normal color
 
 	//Draw the statement block rectangle
-	pWind->DrawTriangle(Left.x -(width+8), Left.y, Left.x - width, Left.y + 6, Left.x - width, Left.y - 6);
+	pWind->DrawTriangle(Left.x - (width + 8), Left.y, Left.x - width, Left.y + 6, Left.x - width, Left.y - 6);
 
 	//Write statement text
 	pWind->SetPen(BLACK, 2);

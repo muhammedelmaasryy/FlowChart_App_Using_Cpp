@@ -34,9 +34,17 @@ void Connector::setEndPoint(Point P)
 Point Connector::getEndPoint()
 {	return End;	}
 
+bool Connector::IsPointOnMe(Point p)
+{
+	return (p.x >= Start.x && p.x <= (End.x))
+		&& (p.y >= Start.y && p.y <= (End.y));
+}
+
 void Connector::Draw(Output* pOut) const
 {
 	///TODO: Call Output to draw a connector from SrcStat to DstStat on the output window
-	pOut->DrawConnector1(Start,End,Select);
+	pOut->DrawLine(Start, 0, 10, Select);
+	pOut->DrawLine1(Start.x, Start.y + 10, End.x, Start.y + 10,Select);
+	pOut->DrawConnector1(End.x,Start.y+10,End.x,End.y,Select);
 }
 
