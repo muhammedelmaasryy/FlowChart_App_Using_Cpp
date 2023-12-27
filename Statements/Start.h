@@ -30,6 +30,9 @@ private:
 
 public:
 	Start(Point Lcorner, string start = "Start");
+	virtual bool IsPointOnMe(Point p);
+	virtual  Point GetStart(Point P);
+	virtual  Point GetEnd(Point P);
 
 	virtual void Draw(Output* pOut) const;
 

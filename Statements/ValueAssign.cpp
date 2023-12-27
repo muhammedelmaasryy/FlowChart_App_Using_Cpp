@@ -43,12 +43,12 @@ void ValueAssign::Draw(Output* pOut) const
 	
 }
 
-Point ValueAssign::GetStart()
+Point ValueAssign::GetStart(Point P)
 {
 	return Outlet;
 }
 
-Point ValueAssign::GetEnd()
+Point ValueAssign::GetEnd(Point P)
 {
 	return Inlet;
 }

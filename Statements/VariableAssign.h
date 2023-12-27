@@ -37,8 +37,8 @@ public:
 
 	virtual void Draw(Output* pOut) const;
 
-	virtual  Point GetStart();
-	virtual  Point GetEnd();
+	virtual  Point GetStart(Point P);
+	virtual  Point GetEnd(Point P);
 	virtual bool IsPointOnMe(Point p);
 
 };

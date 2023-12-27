@@ -221,7 +221,7 @@ void Output::DrawInOut(Point Left, int width, int height, string Text, bool Sele
 		pWind->SetPen(UI.DrawColor, 3);	//use normal color
 
 	//Draw the statement block rectangle
-	pWind->DrawQuad(Left.x, Left.y, Left.x + 3*width/2, Left.y, Left.x +  (width), Left.y + 3*height /4 , Left.x - width /2, Left.y + 3*height /4);
+	pWind->DrawQuad(Left.x, Left.y, Left.x + 3*width/2, Left.y, Left.x +  (width), Left.y + height , Left.x - width /2, Left.y + height );
 
 	//Write statement text
 	pWind->SetPen(BLACK, 2);

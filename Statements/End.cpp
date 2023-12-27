@@ -28,7 +28,21 @@ void End::Draw(Output* pOut) const
 	pOut->DrawEnd(LeftCorner, UI.ASSGN_WDTH, UI.ASSGN_HI, Text, Selected);
 	
 }
+bool End::IsPointOnMe(Point p)
+{
+	return (p.x >= LeftCorner.x && p.x <= (LeftCorner.x + UI.ASSGN_WDTH))
+		&& (p.y >= LeftCorner.y && p.y <= (LeftCorner.y + UI.ASSGN_HI));
+}
 
+Point End::GetStart(Point P)
+{
+	return Outlet;
+}
+
+Point End::GetEnd(Point P)
+{
+	return Inlet;
+}
 //This function should be called when LHS or RHS changes
 void End::UpdateStatementText()
 {

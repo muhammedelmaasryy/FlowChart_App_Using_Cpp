@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Cond::Cond(Point Top, string LeftHS,string Cop, double RightHS)
+Cond::Cond(Point Top, string LeftHS,string Cop, string RightHS)
 {
 	// Note: The LeftHS and RightHS should be validated inside (AddValueAssign) action
 	//       before passing it to the constructor of ValueAssign
@@ -40,23 +40,25 @@ void Cond::setCompOp(string Cop)
 	UpdateStatementText();
 }
 
-void Cond::setRHS(double R)
+void Cond::setRHS(string R)
 {
 	RHS = R;
 	UpdateStatementText();
 }
 
-Point Cond::GetStart()
+
+
+
+Point Cond::GetStart(Point inlet)
 {
-	return Outlet1;
+
+	if (inlet.x <= TopCorner.x)
+		return Outlet2;
+	else
+		return Outlet1;
 }
 
-Point Cond::GetStart1()
-{
-	return Outlet2;
-}
-
-Point Cond::GetEnd()
+Point Cond::GetEnd(Point p)
 {
 	return Inlet;
 }

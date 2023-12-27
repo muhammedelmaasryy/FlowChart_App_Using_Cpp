@@ -1,14 +1,16 @@
-#include "VariableAssign.h"
+#include "OperatorAssign.h"
 #include <sstream>
 
 using namespace std;
 
-VariableAssign::VariableAssign(Point Lcorner, string LeftHS, string RightHS)
+OperatorAssign::OperatorAssign(Point Lcorner, string LeftHS,string arithop ,string RightHS1,string RightHS2)
 {
 	// Note: The LeftHS and RightHS should be validated inside (AddValueAssign) action
 	//       before passing it to the constructor of ValueAssign
 	LHS = LeftHS;
-	RHS = RightHS;
+	ArithOp = arithop;
+	RHS1 = RightHS1;
+	RHS2 = RightHS2;
 
 	UpdateStatementText();
 
@@ -23,36 +25,48 @@ VariableAssign::VariableAssign(Point Lcorner, string LeftHS, string RightHS)
 	Outlet.y = LeftCorner.y + UI.ASSGN_HI;	
 }
 
-void VariableAssign::setLHS(const string &L)
+void OperatorAssign::setLHS(const string &L)
 {
 	LHS = L;
 	UpdateStatementText();
 }
 
-void VariableAssign::setRHS(string R)
+void OperatorAssign::setArithOp(string arithop)
 {
-	RHS = R;
+	ArithOp = arithop;
+}
+
+void OperatorAssign::setRHS1(string R1)
+{
+	RHS1 = R1;
 	UpdateStatementText();
 }
 
-void VariableAssign::Draw(Output* pOut) const
+void OperatorAssign::setRHS2(string R2)
+{
+	RHS2 = R2;
+	UpdateStatementText();
+}
+
+
+void OperatorAssign::Draw(Output* pOut) const
 {
 	//Call Output::DrawAssign function to draw assignment statement 	
 	pOut->DrawAssign(LeftCorner, UI.ASSGN_WDTH, UI.ASSGN_HI, Text, Selected);
 	
 }
 
-Point VariableAssign::GetStart(Point P)
+Point OperatorAssign::GetStart(Point P)
 {
 	return Outlet;
 }
 
-Point VariableAssign::GetEnd(Point P)
+Point OperatorAssign::GetEnd(Point P)
 {
 	return Inlet;
 }
 
-bool VariableAssign::IsPointOnMe(Point p)
+bool OperatorAssign::IsPointOnMe(Point p)
 {
 	return (p.x >= LeftCorner.x && p.x <= (LeftCorner.x + UI.ASSGN_WDTH))
 		&& (p.y >= LeftCorner.y && p.y <= (LeftCorner.y+UI.ASSGN_HI));
@@ -60,10 +74,10 @@ bool VariableAssign::IsPointOnMe(Point p)
 
 
 //This function should be called when LHS or RHS changes
-void VariableAssign::UpdateStatementText()
+void OperatorAssign::UpdateStatementText()
 {
 	//Build the statement text: Left handside then equals then right handside
 	ostringstream T;
-	T<<LHS<<" = "<<RHS;	
+	T<<LHS<<" = "<<RHS1<<ArithOp<<RHS2;	
 	Text = T.str();
 }

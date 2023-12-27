@@ -10,7 +10,7 @@ class Cond : public Statement
 private:
 	string LHS;	//Left Handside of the assignment (name of a variable)
 	string CompOp;
-	double RHS;	//Right Handside (Value)
+	string RHS;	//Right Handside (Value)
 	
 	Connector *pOutConn1;	//Value Assignment Stat. has one Connector to next statement
 	Connector* pOutConn2;                        //Each statement type in flowchart has a predefined number of (output) connectors
@@ -31,15 +31,16 @@ private:
 	virtual void UpdateStatementText();
 	
 public:
-	Cond(Point Top=(0,0), string LeftHS = "", string Cop = "", double RightHS = 0);
+	Cond(Point Top, string LeftHS = "", string Cop = "", string RightHS = 0);
 	
 	void setLHS(const string &L);
 	void setCompOp(string Cop);
-	void setRHS(double R);
+	void setRHS(string R);
 
-	virtual Point GetStart();
-	Point GetStart1();
-	virtual Point GetEnd();
+	virtual Point GetStart(Point P);
+	//Point GetEnd();
+	virtual Point GetEnd(Point p);
+	
 
 	virtual bool IsPointOnMe(Point p);
 

@@ -1,13 +1,13 @@
-#include "Read.h"
+#include "Write.h"
 #include <sstream>
 
 using namespace std;
 
-Read::Read(Point Lcorner, string variable)
+Write::Write(Point Lcorner, double value)
 {
 	// Note: The LeftHS and RightHS should be validated inside (AddValueAssign) action
 	//       before passing it to the constructor of ValueAssign
-	Variable = variable;
+	Value = value;
 
 	UpdateStatementText();
 
@@ -23,32 +23,32 @@ Read::Read(Point Lcorner, string variable)
 }
 
 
-void Read::setVariable( string variable)
+void Write::setValue( double value)
 {
-	Variable = variable;
+	Value = value;
 	UpdateStatementText();
 }
 
 
 
-void Read::Draw(Output* pOut) const
+void Write::Draw(Output* pOut) const
 {
 	//Call Output::DrawAssign function to draw assignment statement 	
 	pOut->DrawInOut(LeftCorner, UI.ASSGN_WDTH, UI.ASSGN_HI, Text, Selected);
 	
 }
 
-Point Read::GetStart(Point P)
+Point Write::GetStart(Point P)
 {
 	return Outlet;
 }
 
-Point Read::GetEnd(Point P)
+Point Write::GetEnd(Point P)
 {
 	return Inlet;
 }
 
-bool Read::IsPointOnMe(Point p)
+bool Write::IsPointOnMe(Point p)
 {
 	return (p.x >= LeftCorner.x && p.x <= (LeftCorner.x + UI.ASSGN_WDTH)&&p.x>=LeftCorner.x-UI.ASSGN_WDTH/2)
 		&& (p.y >= LeftCorner.y && p.y <= (LeftCorner.y+UI.ASSGN_HI));
@@ -56,10 +56,10 @@ bool Read::IsPointOnMe(Point p)
 
 
 //This function should be called when LHS or RHS changes
-void Read::UpdateStatementText()
+void Write::UpdateStatementText()
 {
 	//Build the statement text: Left handside then equals then right handside
 	ostringstream T;
-	T<<Variable << "" << "";
+	T<<Value << "" << "";
 	Text = T.str();
 }

@@ -8,6 +8,10 @@
 #include"Actions\AddConnector.h"
 #include "Actions/AddVariableAssign.h"
 #include"Actions/AddRead.h"
+#include "Actions/AddWrite.h"
+#include "Actions/AddOperatorAssign.h"
+using namespace std;
+#include <iostream>
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -69,12 +73,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_VAR_ASSIGN:
 			pAct = new AddVariableAssign(this);
 			break;
+		case ADD_OPER_ASSIGN:
+			pAct = new AddOperatorAssign(this);
+			break;
 		case ADD_READ:
 			pAct = new AddRead(this);
 			break;
 		case ADD_WRITE:
-			//pAct = new Write(this);
-			//break;
+			pAct = new AddWrite(this);
+			break;
 		case ADD_CONNECTOR:
 			pAct = new AddConn(this);
 			break;
@@ -83,7 +90,26 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 			break;
 
+		case SAVE:
+		//	pAct = new SAVE(this);
+			//break;
+
+		case SWITCH_SIM_MODE:
+			pOut->PrintMessage("Action: Switch to Simulation Mode, creating simualtion tool bar");
+			pOut->ClearToolBar();
+			pOut->ClearDrawArea();
+			pOut->CreateSimulationToolBar();
+			break;
+		case SWITCH_DSN_MODE:
+
+			pOut->PrintMessage("Action: Switch to Design Mode, creating Design tool bar");
+			pOut->ClearToolBar();
+			pOut->ClearDrawArea();
+			pOut->CreateDesignToolBar();
+			break;
 		case EXIT:
+
+
 			///create Exit Action here
 			
 			break;
@@ -140,6 +166,17 @@ Connector* ApplicationManager::GetConnector(Point P) const
 			return ConnList[i];
 	
 	return NULL;
+}
+void ApplicationManager::SaveAll(ofstream& Outputfile)
+{
+	Outputfile << StatCount[i] << endl;
+	for (int i = 0; i < StatCount; i++) {
+		StatList[i]->Save(Outputfile);
+	}
+	Outputfile << ConnCount[i] << endl;
+	for (int i = 0; i < ConnCount; i++) {
+		ConnList[i]->Save(Outputfile);
+	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Returns the selected statement

@@ -1,6 +1,6 @@
-#include"AddCond.h"
+#include "AddOperatorAssign.h"
 
-#include"Action.h"
+
 
 #include "..\ApplicationManager.h"
 
@@ -8,56 +8,66 @@
 #include "..\GUI\Output.h"
 
 #include <sstream>
-#include "../Statements/Cond.h"
 using namespace std;
 
 //constructor: set the ApplicationManager pointer inside this action
-AddCond::AddCond(ApplicationManager *pAppManager):Action(pAppManager)
-{
-}
+AddOperatorAssign::AddOperatorAssign(ApplicationManager *pAppManager):Action(pAppManager)
+{}
 
-void AddCond::ReadActionParameters()
+void AddOperatorAssign::ReadActionParameters()
 {
 	Input *pIn = pManager->GetInput();
 	Output *pOut = pManager->GetOutput();
 	
 	//Read the (Position) parameter
-	pOut->PrintMessage("Conditional Statement: Click to add the statement");
+	pOut->PrintMessage("Operator Assignment Statement: Click to add the statement");
 
 	pIn->GetPointClicked(Position);
 	pOut->ClearStatusBar();		
 
-
+	pOut->PrintMessage("Enter the LHS");
 	LHS=pIn->GetVariable(pOut);
 
+
+
 	
-	CompOp = pIn->GetCompOperator(pOut);
+
 
 
 	//TODO: Ask the user in the status bar to enter the LHS and set the data member
+	
+	pOut->PrintMessage("Enter First right Hand side");
+	RHS1 = pIn->GetString(pOut);
+
+	ArithOp = pIn->GetArithOperator(pOut);
+
+
+	pOut->PrintMessage("Enter Second right Hand side");
+	RHS2 = pIn->GetString(pOut);
 
 	
-	RHS = pIn->GetString(pOut);
+
 
 	pOut->PrintMessage("Click to draw the statement");
 	pIn->GetPointClicked(Position);
 	//TODO: Ask the user in the status bar to enter the RHS and set the data member
 
+
 	//Note: You should validate the LHS to be variable name and RHS to be a value
 	//      Call the appropriate functions for this.
 }
 
-void AddCond::Execute()
+void AddOperatorAssign::Execute()
 {
 	ReadActionParameters();
 		
 	
-	//Calculating Top corner of Conditional statement block
-	Point TopCorner;
-	TopCorner.x = Position.x ;
-	TopCorner.y = Position.y ;
+	//Calculating left corner of assignement statement block
+	Point Corner;
+	Corner.x = Position.x - UI.ASSGN_WDTH/2;
+	Corner.y = Position.y ;
 	
-	Cond *pAssign = new Cond(TopCorner,LHS, CompOp,RHS);
+	OperatorAssign *pAssign = new OperatorAssign(Corner,LHS ,ArithOp,RHS1,RHS2);
 	//TODO: should set the LHS and RHS of pAssign statement
 	//      with the data members set and validated before in ReadActionParameters()
 

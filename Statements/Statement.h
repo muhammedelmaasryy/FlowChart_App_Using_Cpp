@@ -13,10 +13,10 @@ protected:
 	int ID;			//Each Statement has an ID --> must be unique
 	string Text;	//Statement text (e.g.  "X = 5" OR "salary > 3000" and so on)
 	bool Selected;	//true if the statement is selected on the folwchart
-
-
 	virtual void UpdateStatementText() = 0;	//is called when any part of the stat. is edited	
-
+	Point Outlet;
+	Point Inlet;
+	int ID;
 	/// Add more parameters if needed.
 
 public:
@@ -25,8 +25,9 @@ public:
 	bool IsSelected() const;
 
 	virtual void Draw(Output* pOut) const  = 0 ;	//Draw the statement
-	virtual  Point GetStart()=0;
-	virtual  Point GetEnd()=0;
+	
+	virtual  Point GetStart(Point p)=0;
+	virtual  Point GetEnd(Point P)=0;
 	
 	virtual bool IsPointOnMe(Point p) = 0;
 
@@ -34,7 +35,7 @@ public:
 	///		It should then be overridden by each derived Statement
 	///		Decide the parameters that you should pass to each function and its return type
 
-	//virtual void Save(ofstream &OutFile) = 0;	//Save the Statement parameters to a file
+	virtual void Save(ofstream &OutFile) = 0;	//Save the Statement parameters to a file
 	//virtual void Load(ifstream &Infile) = 0;	//Load the Statement parameters from a file
 
 	//virtual void Edit() = 0;		//Edit the Statement parameter

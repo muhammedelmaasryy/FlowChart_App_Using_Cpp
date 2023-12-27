@@ -7,6 +7,7 @@ Connector::Connector(Statement* Src, Statement* Dst,Point Start,Point End):Start
 	this->Select = false;
 	SrcStat = Src;
 	DstStat = Dst;
+	ID = ID + 1;
 }
 
 void Connector::setSrcStat(Statement *Src)
@@ -38,6 +39,11 @@ bool Connector::IsPointOnMe(Point p)
 {
 	return (p.x >= Start.x && p.x <= (End.x))
 		&& (p.y >= Start.y && p.y <= (End.y));
+}
+
+void Connector::Save(ofstream& OutFile)
+{
+	 OutFile << "Connector"<<"   "<<ID<<"   "<<Start.x<<"   "<<Start.y;
 }
 
 void Connector::Draw(Output* pOut) const

@@ -8,8 +8,7 @@
 class Read : public Statement
 {
 private:
-	string LHS;	//Left Handside of the assignment (name of a variable)
-	double RHS;	//Right Handside (Value)
+	
 	string Variable;
 	Connector *pOutConn;	//Value Assignment Stat. has one Connector to next statement
 	                        //Each statement type in flowchart has a predefined number of (output) connectors
@@ -30,16 +29,16 @@ private:
 	virtual void UpdateStatementText();
 	
 public:
-	Read(Point Lcorner, string Variable="");
+	Read(Point Lcorner, string variable="");
 	
 	
-	void setVariable(string& Variable);
+	void setVariable(string variable);
 	
 
 	virtual void Draw(Output* pOut) const;
 
-	virtual  Point GetStart();
-	virtual  Point GetEnd();
+	virtual  Point GetStart(Point P);
+	virtual  Point GetEnd(Point P);
 	virtual bool IsPointOnMe(Point p);
 
 };

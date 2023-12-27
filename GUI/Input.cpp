@@ -16,10 +16,12 @@ void Input::GetPointClicked(Point &P) const
 
 string Input::GetString(Output *pO) const 
 {
+	
 	string Label;
 	char Key;
 	while(1)
 	{
+
 		pWind->WaitKeyPress(Key);
 		if(Key == 27 )	//ESCAPE key is pressed
 			return "";	//returns nothing as user has cancelled label
@@ -62,7 +64,7 @@ double Input::GetValue(Output* pO) const	// Reads a double value from the user
 }
 string Input::GetVariable(Output *pO)const
 {
-	pO->PrintMessage("Enter variable 'LHS':");
+	pO->PrintMessage("Enter variable:");
 	string variable = GetString(pO);
 
 

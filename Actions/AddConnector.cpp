@@ -22,7 +22,8 @@ void AddConn::ReadActionParameters()
 	pOut->PrintMessage("Start Statement: Click Start statement");
 	pIn->GetPointClicked(P1);
 	Statement* Src = pManager->GetStatement(P1);
-	while (!Src) {
+	while (!Src) 
+	{
 		pOut->PrintMessage("Erorr!! Click on valid Start statement");
 		pIn->GetPointClicked(P1);
 		Src = pManager->GetStatement(P1);
@@ -30,7 +31,8 @@ void AddConn::ReadActionParameters()
 	pOut->PrintMessage("Start Statement: Click End statement");
 	pIn->GetPointClicked(P2);
 	Statement* Dst = pManager->GetStatement(P2);
-	while (!Dst) {
+	while (!Dst)
+	{
 		pOut->PrintMessage("Erorr!! Click on valid End statement");
 		pIn->GetPointClicked(P2);
 		Src = pManager->GetStatement(P2);
@@ -49,8 +51,14 @@ void AddConn::Execute()
 	ReadActionParameters();
 	Statement* Src = pManager->GetStatement(P1);
 	Statement* Dst = pManager->GetStatement(P2);
-	Point Start = Src->GetStart();
-	Point End = Dst->GetEnd();
+
+
+	Point Start; 
+	Point End;
+
+	End = Dst->GetEnd(End);
+	Start = Src->GetStart(End);
+
 
 	//Calculating left corner of assignement statement block
 	//Point Corner;
