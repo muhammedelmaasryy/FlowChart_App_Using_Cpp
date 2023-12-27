@@ -1,6 +1,6 @@
-#include"AddCond.h"
+#include"AddRead.h"
 
-#include"Action.h"
+
 
 #include "..\ApplicationManager.h"
 
@@ -8,36 +8,28 @@
 #include "..\GUI\Output.h"
 
 #include <sstream>
-#include "../Statements/Cond.h"
 using namespace std;
 
 //constructor: set the ApplicationManager pointer inside this action
-AddCond::AddCond(ApplicationManager *pAppManager):Action(pAppManager)
+AddRead::AddRead(ApplicationManager *pAppManager):Action(pAppManager)
 {
 }
-
-void AddCond::ReadActionParameters()
+void AddRead::ReadActionParameters()
 {
 	Input *pIn = pManager->GetInput();
 	Output *pOut = pManager->GetOutput();
 	
 	//Read the (Position) parameter
-	pOut->PrintMessage("Conditional Statement: Click to add the statement");
+	pOut->PrintMessage("Read Statement: Click to add the statement");
 
 	pIn->GetPointClicked(Position);
 	pOut->ClearStatusBar();		
 
-
-	LHS=pIn->GetVariable(pOut);
-
 	
-	CompOp = pIn->GetCompOperator(pOut);
-
-
 	//TODO: Ask the user in the status bar to enter the LHS and set the data member
-
+	pOut->PrintMessage("Enter a value to the variable");
 	
-	RHS = pIn->GetValue(pOut);
+	Variable = pIn->GetVariable(pOut);
 
 	pOut->PrintMessage("Click to draw the statement");
 	pIn->GetPointClicked(Position);
@@ -47,17 +39,17 @@ void AddCond::ReadActionParameters()
 	//      Call the appropriate functions for this.
 }
 
-void AddCond::Execute()
+void AddRead::Execute()
 {
 	ReadActionParameters();
 		
 	
-	//Calculating Top corner of Conditional statement block
-	Point TopCorner;
-	TopCorner.x = Position.x ;
-	TopCorner.y = Position.y ;
+	//Calculating left corner of assignement statement block
+	Point Corner;
+	Corner.x = Position.x - UI.ASSGN_WDTH/2;
+	Corner.y = Position.y ;
 	
-	Cond *pAssign = new Cond(TopCorner,LHS, CompOp,RHS);
+	Read *pAssign = new Read(Corner ,Variable);
 	//TODO: should set the LHS and RHS of pAssign statement
 	//      with the data members set and validated before in ReadActionParameters()
 

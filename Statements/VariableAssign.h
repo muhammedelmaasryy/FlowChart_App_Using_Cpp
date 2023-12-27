@@ -1,19 +1,18 @@
-#ifndef COND_H
-#define COND_H
+#ifndef VARIABLE_ASSIGN_H
+#define VARIABLE_ASSIGN_H
 
 #include "Statement.h"
 
 //Value Assignment statement class
 //The value assignment statement assigns a value to a variable
-class Cond : public Statement
+class VariableAssign : public Statement
 {
 private:
 	string LHS;	//Left Handside of the assignment (name of a variable)
-	string CompOp;
-	double RHS;	//Right Handside (Value)
+	string RHS;	//Right Handside (Value)
 	
-	Connector *pOutConn1;	//Value Assignment Stat. has one Connector to next statement
-	Connector* pOutConn2;                        //Each statement type in flowchart has a predefined number of (output) connectors
+	Connector *pOutConn;	//Value Assignment Stat. has one Connector to next statement
+	                        //Each statement type in flowchart has a predefined number of (output) connectors
 	                        //For example, conditional statement always has 2 output connectors
 
 	                        //Note: We don't need to keep track with input connectors
@@ -23,27 +22,24 @@ private:
 
 	Point Inlet;	//A point where connections enters this statement 
 	                //It's used as the (End) point of the (Input) connectors
-	Point Outlet1;	//A point a connection leaves this statement
-	Point Outlet2;                //It's used as the (Start) point of the (Output) connector
+	Point Outlet;	//A point a connection leaves this statement
+	                //It's used as the (Start) point of the (Output) connector
 
-	Point TopCorner;	//left corenr of the statement block.
+	Point LeftCorner;	//left corenr of the statement block.
 
 	virtual void UpdateStatementText();
 	
 public:
-	Cond(Point Top=(0,0), string LeftHS = "", string Cop = "", double RightHS = 0);
+	VariableAssign(Point Lcorner, string LeftHS="", string RightHS="");
 	
 	void setLHS(const string &L);
-	void setCompOp(string Cop);
-	void setRHS(double R);
-
-	virtual Point GetStart();
-	Point GetStart1();
-	virtual Point GetEnd();
-
-	virtual bool IsPointOnMe(Point p);
+	void setRHS(string R);
 
 	virtual void Draw(Output* pOut) const;
+
+	virtual  Point GetStart();
+	virtual  Point GetEnd();
+	virtual bool IsPointOnMe(Point p);
 
 };
 

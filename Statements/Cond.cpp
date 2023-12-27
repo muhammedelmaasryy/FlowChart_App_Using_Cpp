@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Cond::Cond(Point Lcorner, string LeftHS,string Cop, double RightHS)
+Cond::Cond(Point Top, string LeftHS,string Cop, double RightHS)
 {
 	// Note: The LeftHS and RightHS should be validated inside (AddValueAssign) action
 	//       before passing it to the constructor of ValueAssign
@@ -13,15 +13,19 @@ Cond::Cond(Point Lcorner, string LeftHS,string Cop, double RightHS)
 
 	UpdateStatementText();
 
-	LeftCorner = Lcorner;
+	TopCorner = Top;
 	
-	pOutConn = NULL;	//No connectors yet
+	pOutConn1 = NULL;	//No connectors yet
+	pOutConn2 = NULL;
 
-	Inlet.x = LeftCorner.x + UI.ASSGN_WDTH /2;
-	Inlet.y = LeftCorner.y;
+	Inlet.x = TopCorner.x;
+	Inlet.y = TopCorner.y;
 
-	Outlet.x = Inlet.x;
-	Outlet.y = LeftCorner.y + UI.ASSGN_HI;	
+	Outlet1.x = TopCorner.x+ UI.ASSGN_WDTH;
+	Outlet1.y = TopCorner.y + UI.ASSGN_HI;
+	
+	Outlet2.x = TopCorner.x - UI.ASSGN_WDTH;
+	Outlet2.y = TopCorner.y + UI.ASSGN_HI;
 }
 
 void Cond::setLHS(const string &L)
@@ -42,11 +46,31 @@ void Cond::setRHS(double R)
 	UpdateStatementText();
 }
 
+Point Cond::GetStart()
+{
+	return Outlet1;
+}
+
+Point Cond::GetStart1()
+{
+	return Outlet2;
+}
+
+Point Cond::GetEnd()
+{
+	return Inlet;
+}
+
+bool Cond::IsPointOnMe(Point p)
+{
+	return (p.x >= (TopCorner.x-UI.ASSGN_WDTH) && p.x <= (TopCorner.x + UI.ASSGN_WDTH))
+		&& (p.y >= TopCorner.y && p.y <= (TopCorner.y + 2*UI.ASSGN_HI));
+}
 
 void Cond::Draw(Output* pOut) const
 {
 	//Call Output::DrawAssign function to draw assignment statement 	
-	pOut->DrawCond(LeftCorner, UI.ASSGN_WDTH, UI.ASSGN_HI, Text, Selected);
+	pOut->DrawCond(TopCorner, UI.ASSGN_WDTH, UI.ASSGN_HI, Text, Selected);
 	
 }
 

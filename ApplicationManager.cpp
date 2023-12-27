@@ -6,6 +6,8 @@
 #include "Actions/AddStart.h"
 #include"Actions/AddEnd.h"
 #include"Actions\AddConnector.h"
+#include "Actions/AddVariableAssign.h"
+#include"Actions/AddRead.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -64,9 +66,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_END:
 			pAct = new AddEnd(this);
 			break;
+		case ADD_VAR_ASSIGN:
+			pAct = new AddVariableAssign(this);
+			break;
 		case ADD_READ:
-			//pAct = new Read(this);
-			//break;
+			pAct = new AddRead(this);
+			break;
 		case ADD_WRITE:
 			//pAct = new Write(this);
 			//break;
