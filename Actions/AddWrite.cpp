@@ -1,12 +1,6 @@
 #include"AddWrite.h"
-
-
-
+#include "Action.h"
 #include "..\ApplicationManager.h"
-
-#include "..\GUI\input.h"
-#include "..\GUI\Output.h"
-
 #include <sstream>
 using namespace std;
 

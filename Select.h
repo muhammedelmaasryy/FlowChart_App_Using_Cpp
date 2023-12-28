@@ -1,8 +1,8 @@
 #ifndef ADD_SELECT_H
 #define ADD_SELECT_H
 
-#include "Action.h"
-#include "../ApplicationManager.h"
+#include"Actions/Action.h"
+#include "ApplicationManager.h"
 
 class Select :public Action {
 	Point p;
@@ -16,3 +16,4 @@ public:
 	virtual void Execute();
 };
 #endif
+

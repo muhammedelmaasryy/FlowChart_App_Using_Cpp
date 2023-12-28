@@ -1,13 +1,13 @@
-#ifndef ADD_SELECT_H
-#define ADD_SELECT_H
+#ifndef COPY_H
+#define COPY_H
 
 #include "Action.h"
 #include "../ApplicationManager.h"
 
-class Select :public Action {
+class Copy :public Action {
 	Point p;
 public:
-	Select(ApplicationManager* pAppManager);
+	Copy(ApplicationManager* pAppManager);
 
 	//Read Assignemt statements position
 	virtual void ReadActionParameters();

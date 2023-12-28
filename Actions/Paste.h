@@ -1,13 +1,13 @@
-#ifndef ADD_SELECT_H
-#define ADD_SELECT_H
+#ifndef PASTE_H
+#define PASTE_H
 
 #include "Action.h"
 #include "../ApplicationManager.h"
 
-class Select :public Action {
+class Paste :public Action {
 	Point p;
 public:
-	Select(ApplicationManager* pAppManager);
+	Paste(ApplicationManager* pAppManager);
 
 	//Read Assignemt statements position
 	virtual void ReadActionParameters();

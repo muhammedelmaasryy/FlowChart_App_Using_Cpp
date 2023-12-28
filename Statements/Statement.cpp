@@ -8,8 +8,14 @@ Statement::Statement()
 	ID = ID + 1;
 }
 void Statement::SetSelected(bool s)
-{	Selected = s; }
+{	
+	Selected = s; 
+
+}
 
 bool Statement::IsSelected() const
-{	return Selected; }
+{	
+	return Selected; 
+
+}
 

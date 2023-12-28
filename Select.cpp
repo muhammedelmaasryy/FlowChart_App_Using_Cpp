@@ -1,11 +1,11 @@
 #include "Select.h"
-#include "../ApplicationManager.h"
-#include "Action.h"
+
+#include "ApplicationManager.h"
+#include "GUI\input.h"
+#include "GUI\Output.h"
 #include <sstream>
 using namespace std;
-
-
-Select::Select(ApplicationManager* pAppManager) :Action(pAppManager)
+Select::Select(ApplicationManager* pAppManager):Action(pAppManager)
 {
 
 }
@@ -14,9 +14,9 @@ void Select::ReadActionParameters()
 {
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
-   
-	
-	
+
+
+
 	pOut->PrintMessage("Please Select a Statement or a Connector");
 	pIn->GetPointClicked(p);   //to get the a point on statement or connector
 	pOut->ClearStatusBar();
@@ -24,7 +24,6 @@ void Select::ReadActionParameters()
 
 void Select::Execute()
 {
-	ReadActionParameters();
 	Statement* statement = pManager->GetStatement(p);
 
 	if (statement)
@@ -33,31 +32,24 @@ void Select::Execute()
 		{
 			statement->SetSelected(false);
 			pManager->SetSelectedStatement(NULL);
-			return;
 		}
-		else if (!statement->IsSelected() && (pManager->GetSelectedStatement()))
+		else if (!statement->IsSelected() && pManager->GetSelectedStatement())
 		{
-			pManager->GetSelectedStatement()->SetSelected(false);
-			pManager->SetSelectedStatement(NULL);
 
 			statement->SetSelected(true);
 
-			;
+			pManager->SetSelectedStatement(NULL);
 
 			pManager->SetSelectedStatement(statement);
 
-			
-			return;
+			pManager->GetSelectedStatement()->SetSelected(false);
 
 		}
 		else
-		{
 			statement->SetSelected(true);
+		pManager->SetSelectedStatement(statement);
 
-			pManager->SetSelectedStatement(statement);
-		}
 	}
-	
 
 
 	Connector* connector = pManager->GetConnector(p);
@@ -68,26 +60,22 @@ void Select::Execute()
 		{
 			connector->SetSelected(false);
 			pManager->SetSelectedConnector(NULL);
-			return;
 		}
-		else if ((!connector->IsSelected()) && (pManager->GetSelectedConnector()))
+		else if ((!statement->IsSelected()) && (pManager->GetSelectedConnector()))
 		{
-			pManager->SetSelectedConnector(NULL);
-			
-			connector->SetSelected(true);
 
+			statement->SetSelected(true);
+
+			pManager->SetSelectedConnector(NULL);
 
 			pManager->SetSelectedConnector(connector);
 
 			pManager->GetSelectedConnector()->SetSelected(false);
-			return;
+
 		}
 		else
-		{
 			connector->SetSelected(true);
-			pManager->SetSelectedConnector(connector);
-			return;
-		}
+		pManager->SetSelectedConnector(connector);
 	}
-	//pManager->SetSelectedConnector(connector);
 }
+

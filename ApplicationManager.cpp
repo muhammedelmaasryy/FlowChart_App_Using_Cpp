@@ -10,6 +10,9 @@
 #include"Actions/AddRead.h"
 #include "Actions/AddWrite.h"
 #include "Actions/AddOperatorAssign.h"
+#include"Actions/Select.h"
+#include "Actions/Copy.h"
+#include"Actions/Paste.h"
 using namespace std;
 #include <iostream>
 
@@ -23,6 +26,7 @@ ApplicationManager::ApplicationManager()
 	StatCount = 0;
 	ConnCount = 0;
 	pSelectedStat = NULL;	//no Statement is selected yet
+	pSelectedConnector = NULL;
 	pClipboard = NULL;
 	
 	//Create an array of Statement pointers and set them to NULL		
@@ -87,12 +91,17 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case SELECT:
 			///create Select Action here
-
+			pAct = new Select(this);
 			break;
-
+		case COPY:
+			pAct = new Copy(this);
+			break;
+		case PASTE:
+			pAct = new Paste(this);
+				break;
 		case SAVE:
-		//	pAct = new SAVE(this);
-			//break;
+		//	pAct = new Save(this);
+     	//break;
 
 		case SWITCH_SIM_MODE:
 			pOut->PrintMessage("Action: Switch to Simulation Mode, creating simualtion tool bar");
@@ -167,17 +176,17 @@ Connector* ApplicationManager::GetConnector(Point P) const
 	
 	return NULL;
 }
-void ApplicationManager::SaveAll(ofstream& Outputfile)
-{
-	Outputfile << StatCount[i] << endl;
-	for (int i = 0; i < StatCount; i++) {
-		StatList[i]->Save(Outputfile);
-	}
-	Outputfile << ConnCount[i] << endl;
-	for (int i = 0; i < ConnCount; i++) {
-		ConnList[i]->Save(Outputfile);
-	}
-}
+//void ApplicationManager::SaveAll(ofstream& Outputfile)
+//{
+//	Outputfile << StatCount << endl;
+//	for (int i = 0; i < StatCount; i++) {
+//		StatList[i]->Save(Outputfile);
+//	}
+//	Outputfile << ConnCount << endl;
+//	for (int i = 0; i < ConnCount; i++) {
+//		ConnList[i]->Save(Outputfile);
+//	}
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Returns the selected statement
 Statement *ApplicationManager::GetSelectedStatement() const
@@ -185,8 +194,25 @@ Statement *ApplicationManager::GetSelectedStatement() const
 
 ////////////////////////////////////////////////////////////////////////////////////
 //Set the statement selected by the user
-void ApplicationManager::SetSelectedStatement(Statement *pStat)
-{	pSelectedStat = pStat;	}
+void ApplicationManager::SetSelectedConnector(Connector *pConn)
+{
+	pSelectedConnector = pConn;
+}
+
+
+
+Connector* ApplicationManager::GetSelectedConnector() const
+{
+	return pSelectedConnector;
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+//Set the statement selected by the user
+void ApplicationManager::SetSelectedStatement(Statement* pStat)
+{
+	pSelectedStat = pStat;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////////
 //Returns the Clipboard

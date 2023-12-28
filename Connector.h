@@ -19,6 +19,9 @@ private:
 public:
 	Connector(Statement* Src, Statement* Dst,Point Start,Point End);
 
+	void SetSelected(bool s);
+	bool IsSelected() const;
+
 	void		setSrcStat(Statement *Src);
 	Statement*	getSrcStat();	
 	void		setDstStat(Statement *Dst);
